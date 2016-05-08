@@ -5,10 +5,11 @@ import (
 	"net/http/httptest"
 	"strings"
 
-	"github.com/betacraft/yaag/middleware"
-	"github.com/betacraft/yaag/yaag"
-	"github.com/betacraft/yaag/yaag/models"
+	"github.com/korrolion/yaag/middleware"
+	"github.com/korrolion/yaag/yaag"
+	"github.com/korrolion/yaag/yaag/models"
 	"github.com/gin-gonic/gin"
+	"regexp"
 )
 
 func Document() gin.HandlerFunc {
@@ -21,8 +22,14 @@ func Document() gin.HandlerFunc {
 		middleware.Before(&apiCall, c.Request)
 		c.Next()
 		if writer.Code != 404 {
+			validPath := regexp.MustCompile(`^[a-z]+\[[0-9]+\]$`)
+			currentPath := strings.Split(c.Request.RequestURI, "?")[0]
+			if !validPath.MatchString(currentPath) {
+				return
+			}
+
 			apiCall.MethodType = c.Request.Method
-			apiCall.CurrentPath = strings.Split(c.Request.RequestURI, "?")[0]
+			apiCall.CurrentPath = currentPath
 			apiCall.ResponseBody = ""
 			apiCall.ResponseCode = c.Writer.Status()
 			headers := map[string]string{}
