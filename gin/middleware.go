@@ -10,6 +10,7 @@ import (
 	"github.com/korrolion/yaag/yaag/models"
 	"github.com/gin-gonic/gin"
 	"regexp"
+	"fmt"
 )
 
 func Document() gin.HandlerFunc {
@@ -22,7 +23,7 @@ func Document() gin.HandlerFunc {
 		middleware.Before(&apiCall, c.Request)
 		c.Next()
 		if writer.Code != 404 {
-			validPath := regexp.MustCompile(`^[a-z]+\[[0-9]+\]$`)
+			validPath := regexp.MustCompile(`^\/api\/.*`)
 			currentPath := strings.Split(c.Request.RequestURI, "?")[0]
 			if !validPath.MatchString(currentPath) {
 				return
