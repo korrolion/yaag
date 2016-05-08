@@ -10,7 +10,6 @@ import (
 	"github.com/korrolion/yaag/yaag/models"
 	"github.com/gin-gonic/gin"
 	"regexp"
-	"fmt"
 )
 
 func Document() gin.HandlerFunc {
