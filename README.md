@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/korrolion/yaag.svg)](https://travis-ci.org/korrolion/yaag)
+[![Build Status](https://travis-ci.org/betacraft/yaag.svg)](https://travis-ci.org/betacraft/yaag)
 
 [Trello Board](https://trello.com/b/jCZlTsNj/yaag)
 
